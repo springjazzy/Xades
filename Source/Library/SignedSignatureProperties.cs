@@ -251,9 +251,11 @@ namespace Microsoft.Xades
 			{ //SigningTime should be available
 				this.signingTime = DateTime.Now;
 			}
+			DateTime UtcTime = signingTime.ToUniversalTime();
             bufferXmlElement = creationXmlDocument.CreateElement("xades", "SigningTime", XadesSignedXml.XadesNamespaceUri);
+            bufferXmlElement.InnerText = Convert.ToString(UtcTime.ToString("yyyy-MM-ddTHH:mm:ss.fff") + DateTime.Now.ToString(@"zzz"));
 			//bufferXmlElement.InnerText = Convert.ToString(this.signingTime.ToString("s")); //ISO 8601 format as required in http://www.w3.org/TR/xmlschema-2/#dateTime 
-            bufferXmlElement.InnerText = Convert.ToString(this.signingTime.ToString("yyyy-MM-ddTHH:mm:ss.fffzzz")); //ISO 8601 format as required in http://www.w3.org/TR/xmlschema-2/#dateTime 
+            //bufferXmlElement.InnerText = Convert.ToString(this.signingTime.ToString("yyyy-MM-ddTHH:mm:ss.fffzzz")); //ISO 8601 format as required in http://www.w3.org/TR/xmlschema-2/#dateTime 
 			retVal.AppendChild(bufferXmlElement);
 
 			if (this.signingCertificate != null && this.signingCertificate.HasChanged())
