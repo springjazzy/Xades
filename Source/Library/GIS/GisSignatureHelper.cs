@@ -142,7 +142,7 @@ namespace Microsoft.Xades.GIS
         private static string GetOidRepresentation(string issuerName)
         {
             var result = issuerName;
-            result = result.Replace(",E=", ",1.2.840.113549.1.9.1=");
+            result = result.Replace("E=", "1.2.840.113549.1.9.1=");
             return result;
         }
     }
